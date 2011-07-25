@@ -33,7 +33,7 @@ class Aloi_ClassLoader {
     public function load($className) {
         // Load the class based on known prefixes
         foreach($this->prefixes as $prefix => $directory) {
-            if(strpos($className, $prefix) == 0) {
+            if(strpos($className, $prefix) === 0) {
                 // We have a match
                 $file = $directory . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
                 if(file_exists($file)) {
