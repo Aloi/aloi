@@ -1,0 +1,18 @@
+Welcome to the Aloi project
+
+This project is a collection of technologies and approaches to developing Web Applications using PHP5. 
+
+The project includes
+- HTTP Application Server for PHP
+- MVC Architecture based on Struts
+- Routing, Deployment Scripts and more
+
+Demo
+Download the aloi-blank-project to get a project up and running.
+https://github.com/Aloi/aloi-blank-project
+
+For documentation on developing with Aloi, visit: http://aloi-project.org
+
+This project is not currently a 5.3 project. The effort of this project is to make available some of the tools and technologies that some of it's authors have been using for many years in a stable documented form as it may help others. 
+
+If you are looking for a modern PHP5.3 framework, we recommend you look to Symfony2, it has everything you need and there is no real need to work with other home-brewed frameworks.
