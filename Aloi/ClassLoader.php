@@ -23,9 +23,8 @@
  */
 class Aloi_ClassLoader {
 
-    private $prefixes;
-
-    private $fallbackIncludePaths;
+    private $prefixes = array();
+    private $fallbackIncludePaths = array();
 
     public function registerPrefixes(array $prefixes) {
         $this->prefixes = array_merge($this->prefixes, $prefixes);
