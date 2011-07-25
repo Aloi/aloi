@@ -26,51 +26,7 @@
  * @version $Id$
  */
 class Aloi_Core {
-	private static $path;
-	/**
-	 * An SPL autoloader that will attempt to autoload a class when
-	 * it is required.
-	 *
-	 * If the class begins with 'Aloi_' it will be attempted to be included
-	 * directly, without invoking the Aloi_Serphlet_ClassLoader class.
-	 *
-	 * @param $class
-	 * @return boolean whether the class was successfully included
-	 */
-	public static function autoload($className) {
-		// Determine if autoload is scoped correctly
-		if(class_exists($className, false) || interface_exists($className, false)) {
-			return false;
-		}
-		// Determine the actual path and load the file
-		$classRealPath = self::getPath() . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-		if(stripos($className, 'Aloi_') == 0 && file_exists($classRealPath)) {
-			require $classRealPath;
-			return true;
-		} else {
-			// Try using the class loader
-			try {
-				Aloi_Serphlet_ClassLoader::loadClass($className);
-			} catch(Exception $e) {}
-		}
-		return false;
-	}
 	
-	/**
-	 * A method to allow developers to add include paths to the
-	 * current PHP configuration. The path is used by the autoloader
-	 * and PHP to find relative classes.
-	 *
-	 * @param $path The path to add to the PHP include path
-	 */
-	public static function addIncludePath($path) {
-		if(is_array($path)) {
-			foreach($path as $inclosedPath)
-				self::addIncludePath($inclosedPath);
-		} else {
-			set_include_path(get_include_path() . PATH_SEPARATOR . $path);
-		}
-	}
 	
 	/**
 	 * Return with the path to Aloi library files. Determined based on the location
@@ -92,19 +48,7 @@ class Aloi_Core {
 	public static function setPath($path) {
 		self::$path = $path;
 	}
-	
-	/**
-	 * Adds the aloi autoloader to the spl autoload register
-	 * and can optionally set include paths. Use this to register
-	 * Aloi into the application environment.
-	 *
-	 * @param array $includePaths comma seperated list of include paths for PHP
-	 */
-	public static function registerAutoload($includePaths = null) {
-		spl_autoload_register(array('Aloi', 'autoload'));
-		if(!empty($includePaths)) self::addIncludePath($includePaths);
-	}
-	
+
 	/**
 	 * Returns a logging object to use for logging info/debug/warn/error
 	 * events in the application. The Logging Component can be configured to
